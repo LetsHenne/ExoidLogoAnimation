@@ -1,0 +1,270 @@
+import {Img, makeScene2D, Code, Node, Line,Txt, Rect} from '@motion-canvas/2d';
+import {createRef, waitFor, all, tween, map, delay} from '@motion-canvas/core';
+
+export default makeScene2D(function* (view) {  
+  const code = createRef<Code>();
+  const tableRef = createRef<Img>();
+  const arrow = createRef<Node>();
+  const line = createRef<Line>();
+  const txt = createRef<Txt>();
+  const rect = createRef<Rect>();
+
+  view.add(
+    <Code
+	  ref={code}
+      fontSize={58}
+      code={''}
+	  position={400,-400}
+    />,
+  );
+  yield* code().code('string myString = "Hello World!";', 0.6).wait(0.6);
+    
+	
+  yield view.add(
+	<Node ref={arrow} x={-300} y={-280}> 
+		<Img src={'/img/arrow.png'} size={200} /> 
+	</Node>,);
+	
+  yield* waitFor(3);
+  
+  yield view.add(<Img src={'/img/ascii.png'} scale={2.5} position={[600, 4250]} opacity={0} ref={tableRef} />);
+  yield* tableRef().opacity(1,1);
+  yield* waitFor(1);  
+  yield tableRef().position.y(700,1.5);
+  yield* waitFor(2);
+  yield view.add(<Line
+      points={[
+        [0, 0],
+        [0,80],
+        [600, 80],
+		[600, 0],
+      ]}
+	  opacity={0}
+	  ref={line}
+	  position={[300,-20]}
+	  closed
+      stroke={'red'}
+      lineWidth={8}
+    />,);  
+  yield* line().opacity(1, 1);
+  yield* waitFor(1);
+  
+  //File border
+  yield view.add(
+  <Rect
+	ref={rect}
+	height={600}
+	bottom={[-660,320]}
+	width={520}
+	//position={[-660,-50]}
+    fill={'#444444'}
+    />,);  
+  
+  
+  //H
+  yield view.add(<Txt
+	text={"01001000"}
+	  position={[445,20]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield* all(
+	txt().position([-800,-230], 2), 
+	line().opacity(0, 1.5));
+	
+	
+  //e
+  yield* all(
+	tableRef().position.y(-2000,1.5),
+	arrow().position([-275,-280], 1.5)
+  );  
+  
+  yield view.add(<Txt
+	text={"01100101"}
+	  position={[445,148]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-530,-230], 2)
+  yield* waitFor(0.5);
+  
+  
+  //l
+  yield* all(
+	tableRef().position.y(-2700,1),
+	arrow().position([-237,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01101100"}
+	  position={[445,130]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-800,-130], 1.5)
+  yield* waitFor(0.5);
+  
+  //l
+  yield arrow().position([-210,-280], 1)
+  yield view.add(<Txt
+	text={"01101100"}
+	  position={[445,130]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-530, -130], 1.5)
+  yield* waitFor(0.5);
+  
+  //o
+  yield* all(
+	tableRef().position.y(-3000,1),
+	arrow().position([-175,-230], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01101111"}
+	  position={[445,130]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-800,-30], 1.5)
+  yield* waitFor(0.5);
+  
+  // (space)
+  yield* all(
+	tableRef().position.y(4250,1),
+	arrow().position([-145,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"00100000"}
+	  position={[445,-330]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-530,-30], 1.5)
+  yield* waitFor(0.5);
+  
+ //W
+  yield* all(
+	tableRef().position.y(800,1),
+	arrow().position([-110,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01010111"}
+	  position={[445,120]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-800,70], 1.5)
+  yield* waitFor(0.5);
+  
+ //o
+  yield* all(
+	tableRef().position.y(-3000,1),
+	arrow().position([-75,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01101111"}
+	  position={[445,130]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-530,70], 1.5)
+  yield* waitFor(0.5);
+
+  //r
+  yield* all(
+	tableRef().position.y(-3300,1),
+	arrow().position([-50,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01110010"}
+	  position={[445,115]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-800,170], 1.5)
+  yield* waitFor(0.5);
+  
+  //l
+  yield* all(
+	tableRef().position.y(-2700,1),
+	arrow().position([-18,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"01101100"}
+	  position={[445,130]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield txt().position([-530,170], 1.5)
+  yield* waitFor(0.5);
+  
+  //d
+  yield* all(
+	tableRef().position.y(-2000,1),
+	arrow().position([15,-280], 1),
+  );  
+  yield view.add(
+		<Txt
+		  text={"01100100"}
+		  position={[445,50]}
+		  fill={'white'}
+		  ref={txt}
+		/>,);
+		
+  yield txt().position([-800,270], 1.5);  
+  yield* waitFor(0.5);
+  
+  //!
+  yield* all(
+	tableRef().position.y(4250,1),
+	arrow().position([50,-280], 1)
+  );  
+  
+  yield view.add(<Txt
+	text={"00100001"}
+	  position={[445,-230]}
+	  fill={'white'}
+	  ref={txt}
+  />,); 
+  yield* txt().position([-530,270], 1.5)
+  
+  
+  //arrow vanish
+  yield* arrow().opacity(0, 1);  
+  
+  //length text
+  yield* view.add(<Txt
+	text={""}
+	  position={[-200,-200]}
+	  fill={'lightblue'}
+	  ref={txt}
+  />,);   
+  
+  yield* txt().text("length = 12", 1.0);
+  
+    yield* view.add(<Txt
+	text={""}
+	  position={[-200,-130]}
+	  fill={'lightblue'}
+	  ref={txt}
+  />,);   
+  
+  yield* txt().text("-> 00001100", 1.0);
+  yield* waitFor(1.5);
+  
+  yield* all(
+  rect().size([520, 680],1),
+  rect().bottom([-660,320],1),
+  txt().text("00001100", 0), 
+  txt().position([-800, -310], 2)
+  );  
+  
+  yield* waitFor(10);
+}); 
